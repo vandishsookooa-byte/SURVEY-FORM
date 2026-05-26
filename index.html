@@ -3,310 +3,339 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RT Knits - Transport Department Service Survey</title>
+  <title>RT Knits LTD - Transport Technical Survey</title>
   <style>
     :root {
-      --primary: #154360;
-      --primary-soft: #eaf3fa;
-      --accent: #1f7a8c;
+      --primary: #0f3d68;
+      --primary-soft: #e8f1fa;
+      --accent: #0f7b6c;
       --text: #1f2933;
       --muted: #52606d;
       --border: #d9e2ec;
       --success: #1b8a5a;
-      --bg: #f7f9fc;
+      --bg: #f5f8fb;
       --white: #ffffff;
     }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.45;
     }
-
     .container {
-      max-width: 960px;
-      margin: 30px auto;
+      max-width: 1080px;
+      margin: 28px auto;
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
     }
-
     .header {
       padding: 24px;
-      background: linear-gradient(135deg, var(--primary), #1d5f87);
+      background: linear-gradient(140deg, var(--primary), #1b5a8f);
       color: var(--white);
     }
-
-    .header h1 {
-      margin: 0 0 6px;
-      font-size: 1.5rem;
-    }
-
-    .header p {
-      margin: 0;
-      opacity: 0.95;
-    }
-
-    form {
-      padding: 24px;
-    }
-
+    .header h1 { margin: 0 0 8px; font-size: 1.55rem; }
+    .header p { margin: 0; opacity: 0.95; }
+    form { padding: 22px; }
     .section {
-      margin-bottom: 22px;
-      padding: 16px;
+      margin-bottom: 18px;
       border: 1px solid var(--border);
       border-radius: 10px;
+      padding: 14px;
       background: #fff;
     }
-
     .section h2 {
-      margin: 0 0 12px;
-      font-size: 1.05rem;
+      margin: 0 0 10px;
       color: var(--primary);
+      font-size: 1.05rem;
     }
-
-    .grid {
+    .section h3 {
+      margin: 8px 0 10px;
+      color: #184c7a;
+      font-size: 0.98rem;
+    }
+    .hint { color: var(--muted); font-size: 0.88rem; }
+    .grid { display: grid; gap: 12px; }
+    .grid.two { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .question-grid { display: grid; gap: 10px; }
+    .question-row {
       display: grid;
-      gap: 12px;
+      grid-template-columns: 1.7fr 1fr;
+      gap: 10px;
+      align-items: end;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #e1e8f0;
     }
-
-    .grid.two {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
-    label {
-      display: block;
-      font-weight: 600;
-      font-size: 0.92rem;
-      margin-bottom: 6px;
-    }
-
-    input[type="text"],
-    select,
-    textarea {
+    .question-row:last-child { border-bottom: 0; }
+    label { display: block; font-weight: 600; font-size: 0.92rem; margin-bottom: 5px; }
+    input[type="text"], select, textarea {
       width: 100%;
-      padding: 9px 10px;
       border: 1px solid #bcccdc;
       border-radius: 8px;
+      padding: 9px 10px;
       font: inherit;
-      color: var(--text);
       background: #fff;
+      color: var(--text);
     }
-
-    textarea {
-      resize: vertical;
-      min-height: 96px;
-    }
-
+    textarea { min-height: 92px; resize: vertical; }
     .checkbox-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 8px 12px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 8px 10px;
     }
-
     .checkbox-item {
       display: flex;
-      align-items: flex-start;
       gap: 8px;
+      align-items: flex-start;
       font-weight: 500;
-      font-size: 0.92rem;
-      color: var(--text);
+      font-size: 0.9rem;
     }
-
-    .rating-grid {
-      display: grid;
-      gap: 10px;
-    }
-
-    .rating-row {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: 1.6fr 1fr;
-      align-items: end;
-    }
-
-    .btn-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-top: 12px;
-    }
-
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 8px; }
     button {
       border: 0;
       border-radius: 8px;
       padding: 10px 16px;
+      background: var(--accent);
+      color: #fff;
       font: inherit;
       font-weight: 700;
-      color: #fff;
-      background: var(--accent);
       cursor: pointer;
     }
-
-    button:hover { background: #1d6a79; }
-
-    .hint {
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .status {
-      margin-top: 12px;
-      color: var(--success);
-      font-weight: 600;
-      font-size: 0.92rem;
-    }
-
+    button:hover { background: #0e675b; }
+    .status { color: var(--success); font-weight: 600; font-size: 0.9rem; margin-top: 10px; }
     .table-wrap {
-      overflow-x: auto;
-      margin-top: 14px;
+      margin-top: 8px;
       border: 1px solid var(--border);
       border-radius: 8px;
+      overflow-x: auto;
     }
-
     table {
-      border-collapse: collapse;
       width: 100%;
-      min-width: 900px;
-      font-size: 0.86rem;
+      border-collapse: collapse;
+      min-width: 1200px;
+      font-size: 0.83rem;
     }
-
-    th, td {
-      border-bottom: 1px solid var(--border);
-      text-align: left;
-      padding: 8px;
-      vertical-align: top;
-    }
-
+    th, td { border-bottom: 1px solid var(--border); text-align: left; padding: 7px; vertical-align: top; }
     th {
       background: var(--primary-soft);
       color: var(--primary);
-      font-weight: 700;
       position: sticky;
       top: 0;
     }
-
-    @media (max-width: 700px) {
+    @media (max-width: 760px) {
       .container { margin: 10px; }
-      form { padding: 16px; }
-      .rating-row { grid-template-columns: 1fr; }
+      form { padding: 14px; }
+      .question-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header class="header">
-      <h1>RT Knits - Transport Department Service Survey</h1>
-      <p>Measure service quality and satisfaction across all departments.</p>
+      <h1>RT Knits LTD - Transport Department Technical Survey</h1>
+      <p>Two-section survey: Conveyance service (for concerned employees) and Production service feedback.</p>
     </header>
-
     <form id="surveyForm">
       <section class="section">
-        <h2>1) Respondent Information</h2>
+        <h2>1) Respondent Details</h2>
         <div class="grid two">
           <div>
             <label for="respondentName">Employee Name</label>
-            <input type="text" id="respondentName" name="respondentName" required placeholder="Enter your name">
+            <input id="respondentName" name="respondentName" type="text" required placeholder="Enter your name">
           </div>
           <div>
-            <label for="employeeId">Employee ID (optional)</label>
-            <input type="text" id="employeeId" name="employeeId" placeholder="e.g. RTK-1029">
+            <label for="employeeId">Employee ID</label>
+            <input id="employeeId" name="employeeId" type="text" placeholder="e.g. RTK-204">
+          </div>
+          <div>
+            <label for="shiftTiming">Shift Timing</label>
+            <select id="shiftTiming" name="shiftTiming" required>
+              <option value="">Select shift</option>
+              <option>Morning Shift</option>
+              <option>General Shift</option>
+              <option>Evening Shift</option>
+              <option>Night Shift</option>
+            </select>
+          </div>
+          <div>
+            <label for="isConveyanceUser">Do you use company conveyance?</label>
+            <select id="isConveyanceUser" name="isConveyanceUser" required>
+              <option value="">Select</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
           </div>
         </div>
       </section>
 
       <section class="section">
-        <h2>2) Department</h2>
-        <p class="hint">Select one or more departments you represent.</p>
-        <div class="checkbox-grid" id="departmentList"></div>
+        <h2>2) Department(s)</h2>
+        <p class="hint">Select one or more departments.</p>
+        <div id="departmentList" class="checkbox-grid"></div>
       </section>
 
       <section class="section">
-        <h2>3) Service Ratings (1 = Poor, 5 = Excellent)</h2>
-        <div class="rating-grid">
-          <div class="rating-row">
+        <h2>3) Main Section A - Conveyance (for those concerned)</h2>
+        <p class="hint">Answer these technical questions for company transport services.</p>
+        <div class="question-grid">
+          <div class="question-row">
+            <div><label for="q1_transportShift">1. Are company transport services available for your shift timings?</label></div>
             <div>
-              <label for="pickupDropRating">Conveyance (Pickup & Drop-off of Employees)</label>
-            </div>
-            <div>
-              <select id="pickupDropRating" name="pickupDropRating" required>
-                <option value="">Select rating</option>
-                <option value="1">1 - Poor</option>
-                <option value="2">2 - Fair</option>
-                <option value="3">3 - Good</option>
-                <option value="4">4 - Very Good</option>
-                <option value="5">5 - Excellent</option>
+              <select id="q1_transportShift" name="q1_transportShift" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>Partially</option>
+                <option>No</option>
               </select>
             </div>
           </div>
-
-          <div class="rating-row">
+          <div class="question-row">
+            <div><label for="q2_allocationSatisfaction">2. How satisfied are you with transport allocation?</label></div>
             <div>
-              <label for="overtimeTransportRating">Overtime Transport Arrangement</label>
-            </div>
-            <div>
-              <select id="overtimeTransportRating" name="overtimeTransportRating" required>
+              <select id="q2_allocationSatisfaction" name="q2_allocationSatisfaction" required>
                 <option value="">Select rating</option>
-                <option value="1">1 - Poor</option>
-                <option value="2">2 - Fair</option>
-                <option value="3">3 - Good</option>
-                <option value="4">4 - Very Good</option>
-                <option value="5">5 - Excellent</option>
+                <option>1 - Very Dissatisfied</option>
+                <option>2 - Dissatisfied</option>
+                <option>3 - Neutral</option>
+                <option>4 - Satisfied</option>
+                <option>5 - Very Satisfied</option>
               </select>
             </div>
           </div>
-
-          <div class="rating-row">
+          <div class="question-row">
+            <div><label for="q3_assignedOnTime">3. Is the transport usually assigned on time?</label></div>
             <div>
-              <label for="transferPlanningRating">Production Planning: Outgoing/Incoming Transfer Requests</label>
-            </div>
-            <div>
-              <select id="transferPlanningRating" name="transferPlanningRating" required>
-                <option value="">Select rating</option>
-                <option value="1">1 - Poor</option>
-                <option value="2">2 - Fair</option>
-                <option value="3">3 - Good</option>
-                <option value="4">4 - Very Good</option>
-                <option value="5">5 - Excellent</option>
+              <select id="q3_assignedOnTime" name="q3_assignedOnTime" required>
+                <option value="">Select</option>
+                <option>Always</option>
+                <option>Most of the time</option>
+                <option>Rarely</option>
+                <option>Never</option>
               </select>
             </div>
           </div>
-
-          <div class="rating-row">
+          <div class="question-row">
+            <div><label for="q4_punctualityRating">4. How would you rate the punctuality of the transport service?</label></div>
             <div>
-              <label for="logisticsRating">Import and Export Logistics Service</label>
-            </div>
-            <div>
-              <select id="logisticsRating" name="logisticsRating" required>
+              <select id="q4_punctualityRating" name="q4_punctualityRating" required>
                 <option value="">Select rating</option>
-                <option value="1">1 - Poor</option>
-                <option value="2">2 - Fair</option>
-                <option value="3">3 - Good</option>
-                <option value="4">4 - Very Good</option>
-                <option value="5">5 - Excellent</option>
+                <option>1 - Poor</option>
+                <option>2 - Fair</option>
+                <option>3 - Good</option>
+                <option>4 - Very Good</option>
+                <option>5 - Excellent</option>
               </select>
             </div>
           </div>
-
-          <div class="rating-row">
+          <div class="question-row">
+            <div><label for="q5_delayExperience">5. Have you experienced delays in pickup/drop-off?</label></div>
             <div>
-              <label for="overallSatisfaction">Overall Satisfaction with Transport Department</label>
+              <select id="q5_delayExperience" name="q5_delayExperience" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>No</option>
+              </select>
             </div>
+          </div>
+          <div class="question-row">
+            <div><label for="q6_averageDelay">6. If yes, what is the average delay?</label></div>
             <div>
-              <select id="overallSatisfaction" name="overallSatisfaction" required>
+              <select id="q6_averageDelay" name="q6_averageDelay" required>
+                <option value="">Select</option>
+                <option>Not applicable</option>
+                <option>0-10 minutes</option>
+                <option>11-20 minutes</option>
+                <option>21-30 minutes</option>
+                <option>More than 30 minutes</option>
+              </select>
+            </div>
+          </div>
+          <div class="question-row">
+            <div><label for="q7_driverBehaviour">7. How would you rate driver behaviour and professionalism?</label></div>
+            <div>
+              <select id="q7_driverBehaviour" name="q7_driverBehaviour" required>
                 <option value="">Select rating</option>
-                <option value="1">1 - Poor</option>
-                <option value="2">2 - Fair</option>
-                <option value="3">3 - Good</option>
-                <option value="4">4 - Very Good</option>
-                <option value="5">5 - Excellent</option>
+                <option>1 - Poor</option>
+                <option>2 - Fair</option>
+                <option>3 - Good</option>
+                <option>4 - Very Good</option>
+                <option>5 - Excellent</option>
+              </select>
+            </div>
+          </div>
+          <div class="question-row">
+            <div><label for="q8_vehicleCondition">8. How satisfied are you with vehicle cleanliness and condition?</label></div>
+            <div>
+              <select id="q8_vehicleCondition" name="q8_vehicleCondition" required>
+                <option value="">Select rating</option>
+                <option>1 - Very Dissatisfied</option>
+                <option>2 - Dissatisfied</option>
+                <option>3 - Neutral</option>
+                <option>4 - Satisfied</option>
+                <option>5 - Very Satisfied</option>
+              </select>
+            </div>
+          </div>
+          <div class="question-row">
+            <div><label for="q9_safetyLevel">9. Do you feel safe while using the transport service? (Rarely / Most of the time / Always)</label></div>
+            <div>
+              <select id="q9_safetyLevel" name="q9_safetyLevel" required>
+                <option value="">Select</option>
+                <option>Rarely</option>
+                <option>Most of the time</option>
+                <option>Always</option>
+              </select>
+            </div>
+          </div>
+          <div class="question-row">
+            <div><label for="q10_routeConvenient">10. Is the travel route convenient for you?</label></div>
+            <div>
+              <select id="q10_routeConvenient" name="q10_routeConvenient" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>Somewhat</option>
+                <option>No</option>
+              </select>
+            </div>
+          </div>
+          <div class="question-row">
+            <div><label for="q11_seatingComfort">11. How would you rate seating comfort and occupancy?</label></div>
+            <div>
+              <select id="q11_seatingComfort" name="q11_seatingComfort" required>
+                <option value="">Select rating</option>
+                <option>1 - Poor</option>
+                <option>2 - Fair</option>
+                <option>3 - Good</option>
+                <option>4 - Very Good</option>
+                <option>5 - Excellent</option>
+              </select>
+            </div>
+          </div>
+          <div class="question-row">
+            <div><label for="q12_pickupPoints">12. Are pickup and drop-off points suitable?</label></div>
+            <div>
+              <select id="q12_pickupPoints" name="q12_pickupPoints" required>
+                <option value="">Select</option>
+                <option>Yes</option>
+                <option>Partially</option>
+                <option>No</option>
+              </select>
+            </div>
+          </div>
+          <div class="question-row">
+            <div><label for="q13_overallConveyance">13. Overall, how satisfied are you with company conveyance services?</label></div>
+            <div>
+              <select id="q13_overallConveyance" name="q13_overallConveyance" required>
+                <option value="">Select rating</option>
+                <option>1 - Very Dissatisfied</option>
+                <option>2 - Dissatisfied</option>
+                <option>3 - Neutral</option>
+                <option>4 - Satisfied</option>
+                <option>5 - Very Satisfied</option>
               </select>
             </div>
           </div>
@@ -314,34 +343,69 @@
       </section>
 
       <section class="section">
-        <h2>4) Feedback</h2>
-        <label for="comments">Comments / Suggestions</label>
-        <textarea id="comments" name="comments" placeholder="Please share issues, suggestions, or improvement ideas..."></textarea>
+        <h2>4) Main Section B - Production (initial block, questions to be expanded)</h2>
+        <h3>Production Support Feedback</h3>
+        <div class="question-grid">
+          <div class="question-row">
+            <div><label for="p1_transferSupport">How do you rate outgoing and incoming transfer request support?</label></div>
+            <div>
+              <select id="p1_transferSupport" name="p1_transferSupport" required>
+                <option value="">Select rating</option>
+                <option>1 - Poor</option>
+                <option>2 - Fair</option>
+                <option>3 - Good</option>
+                <option>4 - Very Good</option>
+                <option>5 - Excellent</option>
+              </select>
+            </div>
+          </div>
+          <div class="question-row">
+            <div><label for="p2_logisticsCoordination">How do you rate import/export logistics coordination for production?</label></div>
+            <div>
+              <select id="p2_logisticsCoordination" name="p2_logisticsCoordination" required>
+                <option value="">Select rating</option>
+                <option>1 - Poor</option>
+                <option>2 - Fair</option>
+                <option>3 - Good</option>
+                <option>4 - Very Good</option>
+                <option>5 - Excellent</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <label for="productionNotes" style="margin-top:10px;">Production comments / additional questions to include next update</label>
+        <textarea id="productionNotes" name="productionNotes" placeholder="Add production-specific concerns or the next set of questions to include..."></textarea>
+      </section>
+
+      <section class="section">
+        <h2>5) Final Comments</h2>
+        <label for="comments">Additional suggestions for Transport Department</label>
+        <textarea id="comments" name="comments" placeholder="Write any extra remarks..."></textarea>
       </section>
 
       <div class="btn-row">
         <button type="submit">Submit Survey</button>
         <button type="button" id="downloadBtn">Download Latest Excel</button>
-        <span class="hint">Excel updates automatically on every submit.</span>
+        <span class="hint">Excel is generated locally in your browser after each submit.</span>
       </div>
-      <p class="status" id="statusMessage" aria-live="polite"></p>
+      <p id="statusMessage" class="status" aria-live="polite"></p>
 
       <section class="section">
-        <h2>5) Local Submission Summary</h2>
+        <h2>6) Local Submission Summary</h2>
         <p class="hint">Saved in this browser only. Current responses: <strong id="entryCount">0</strong></p>
         <div class="table-wrap">
           <table id="previewTable">
             <thead>
               <tr>
                 <th>Submitted At</th>
-                <th>Employee Name</th>
-                <th>Employee ID</th>
+                <th>Name</th>
+                <th>ID</th>
+                <th>Shift</th>
+                <th>Conveyance User</th>
                 <th>Departments</th>
-                <th>Pickup & Drop</th>
-                <th>Overtime Transport</th>
-                <th>Transfer Planning</th>
-                <th>Import/Export Logistics</th>
-                <th>Overall</th>
+                <th>Q13 Overall Conveyance</th>
+                <th>P1 Transfer Support</th>
+                <th>P2 Logistics</th>
                 <th>Comments</th>
               </tr>
             </thead>
@@ -354,47 +418,44 @@
 
   <script>
     const departments = [
-      "Make Up",
-      "Cutting",
-      "Embroidery",
-      "Dyehouse",
-      "Printing",
-      "Maintenance",
-      "Shipping",
-      "Purchasing",
-      "Knitting",
-      "Marketing",
-      "Yarn Store",
-      "Fabric Store",
-      "Central Store",
-      "Admin"
+      "Make Up", "Cutting", "Embroidery", "Dyehouse", "Printing", "Maintenance",
+      "Shipping", "Purchasing", "Knitting", "Marketing", "Yarn Store", "Fabric Store",
+      "Central Store", "Admin"
     ];
 
-    const storageKey = "rtKnitsTransportSurveyResponses";
+    const headers = [
+      "submittedAt", "respondentName", "employeeId", "shiftTiming", "isConveyanceUser", "departments",
+      "q1_transportShift", "q2_allocationSatisfaction", "q3_assignedOnTime", "q4_punctualityRating",
+      "q5_delayExperience", "q6_averageDelay", "q7_driverBehaviour", "q8_vehicleCondition",
+      "q9_safetyLevel", "q10_routeConvenient", "q11_seatingComfort", "q12_pickupPoints",
+      "q13_overallConveyance", "p1_transferSupport", "p2_logisticsCoordination", "productionNotes", "comments"
+    ];
+
+    const storageKey = "rtKnitsTransportTechSurveyResponses";
     const form = document.getElementById("surveyForm");
     const departmentList = document.getElementById("departmentList");
-    const statusMessage = document.getElementById("statusMessage");
-    const entryCount = document.getElementById("entryCount");
     const previewBody = document.querySelector("#previewTable tbody");
+    const entryCount = document.getElementById("entryCount");
     const downloadBtn = document.getElementById("downloadBtn");
+    const statusMessage = document.getElementById("statusMessage");
 
-    function buildDepartmentCheckboxes() {
+    function buildDepartmentList() {
       departmentList.innerHTML = "";
       departments.forEach((department, index) => {
-        const wrapper = document.createElement("label");
-        wrapper.className = "checkbox-item";
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.name = "departments";
-        checkbox.value = department;
-        checkbox.id = `department-${index}`;
-        wrapper.appendChild(checkbox);
-        wrapper.appendChild(document.createTextNode(department));
-        departmentList.appendChild(wrapper);
+        const item = document.createElement("label");
+        item.className = "checkbox-item";
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.name = "departments";
+        input.value = department;
+        input.id = `department-${index}`;
+        item.appendChild(input);
+        item.appendChild(document.createTextNode(department));
+        departmentList.appendChild(item);
       });
     }
 
-    function getSavedResponses() {
+    function getResponses() {
       try {
         return JSON.parse(localStorage.getItem(storageKey)) || [];
       } catch {
@@ -406,31 +467,8 @@
       localStorage.setItem(storageKey, JSON.stringify(data));
     }
 
-    function renderPreviewTable() {
-      const responses = getSavedResponses();
-      entryCount.textContent = String(responses.length);
-      previewBody.innerHTML = "";
-
-      responses.slice().reverse().forEach((response) => {
-        const row = document.createElement("tr");
-        [
-          response.submittedAt,
-          response.respondentName,
-          response.employeeId,
-          response.departments,
-          response.pickupDropRating,
-          response.overtimeTransportRating,
-          response.transferPlanningRating,
-          response.logisticsRating,
-          response.overallSatisfaction,
-          response.comments
-        ].forEach((value) => {
-          const cell = document.createElement("td");
-          cell.textContent = value || "-";
-          row.appendChild(cell);
-        });
-        previewBody.appendChild(row);
-      });
+    function getSelectedDepartments() {
+      return Array.from(document.querySelectorAll('input[name="departments"]:checked')).map((box) => box.value);
     }
 
     function escapeXml(value) {
@@ -443,33 +481,19 @@
     }
 
     function generateExcel() {
-      const responses = getSavedResponses();
-      const headers = [
-        "submittedAt",
-        "respondentName",
-        "employeeId",
-        "departments",
-        "pickupDropRating",
-        "overtimeTransportRating",
-        "transferPlanningRating",
-        "logisticsRating",
-        "overallSatisfaction",
-        "comments"
-      ];
+      const responses = getResponses();
+      const headerRow = headers.map((header) =>
+        `<Cell><Data ss:Type="String">${escapeXml(header)}</Data></Cell>`
+      ).join("");
 
-      const rows = responses.map((row) =>
-        headers.map((header) => escapeXml(row[header] || ""))
-      );
+      const bodyRows = responses.map((response) => {
+        const cells = headers.map((header) =>
+          `<Cell><Data ss:Type="String">${escapeXml(response[header] || "")}</Data></Cell>`
+        ).join("");
+        return `<Row>${cells}</Row>`;
+      }).join("");
 
-      const headerRow = headers
-        .map((header) => `<Cell><Data ss:Type="String">${escapeXml(header)}</Data></Cell>`)
-        .join("");
-
-      const bodyRows = rows
-        .map((cells) => `<Row>${cells.map((value) => `<Cell><Data ss:Type="String">${value}</Data></Cell>`).join("")}</Row>`)
-        .join("");
-
-      const workbookXml = `<?xml version="1.0"?>
+      const xmlWorkbook = `<?xml version="1.0"?>
 <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
  xmlns:o="urn:schemas-microsoft-com:office:office"
  xmlns:x="urn:schemas-microsoft-com:office:excel"
@@ -482,19 +506,41 @@
  </Worksheet>
 </Workbook>`;
 
-      const blob = new Blob([workbookXml], { type: "application/vnd.ms-excel" });
+      const blob = new Blob([xmlWorkbook], { type: "application/vnd.ms-excel" });
       const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "RT_Knits_Transport_Survey_Responses.xls";
+      const url = URL.createObjectURL(blob);
+      link.href = url;
+      link.download = "RT_Knits_LTD_Transport_Technical_Survey.xls";
       document.body.appendChild(link);
       link.click();
       link.remove();
-      URL.revokeObjectURL(link.href);
+      URL.revokeObjectURL(url);
     }
 
-    function getSelectedDepartments() {
-      return Array.from(document.querySelectorAll('input[name="departments"]:checked'))
-        .map((input) => input.value);
+    function renderPreview() {
+      const responses = getResponses();
+      entryCount.textContent = String(responses.length);
+      previewBody.innerHTML = "";
+      responses.slice().reverse().forEach((response) => {
+        const row = document.createElement("tr");
+        [
+          response.submittedAt,
+          response.respondentName,
+          response.employeeId,
+          response.shiftTiming,
+          response.isConveyanceUser,
+          response.departments,
+          response.q13_overallConveyance,
+          response.p1_transferSupport,
+          response.p2_logisticsCoordination,
+          response.comments
+        ].forEach((value) => {
+          const cell = document.createElement("td");
+          cell.textContent = value || "-";
+          row.appendChild(cell);
+        });
+        previewBody.appendChild(row);
+      });
     }
 
     form.addEventListener("submit", (event) => {
@@ -502,7 +548,7 @@
       statusMessage.textContent = "";
 
       const selectedDepartments = getSelectedDepartments();
-      if (selectedDepartments.length === 0) {
+      if (!selectedDepartments.length) {
         statusMessage.textContent = "Please select at least one department.";
         return;
       }
@@ -511,32 +557,34 @@
         submittedAt: new Date().toLocaleString(),
         respondentName: document.getElementById("respondentName").value.trim(),
         employeeId: document.getElementById("employeeId").value.trim(),
-        departments: selectedDepartments.join(", "),
-        pickupDropRating: document.getElementById("pickupDropRating").value,
-        overtimeTransportRating: document.getElementById("overtimeTransportRating").value,
-        transferPlanningRating: document.getElementById("transferPlanningRating").value,
-        logisticsRating: document.getElementById("logisticsRating").value,
-        overallSatisfaction: document.getElementById("overallSatisfaction").value,
-        comments: document.getElementById("comments").value.trim()
+        shiftTiming: document.getElementById("shiftTiming").value,
+        isConveyanceUser: document.getElementById("isConveyanceUser").value,
+        departments: selectedDepartments.join(", ")
       };
 
-      const existing = getSavedResponses();
-      existing.push(payload);
-      saveResponses(existing);
-      renderPreviewTable();
-      generateExcel();
+      headers.forEach((header) => {
+        if (!(header in payload)) {
+          const field = document.getElementById(header);
+          payload[header] = field ? field.value.trim() : "";
+        }
+      });
 
+      const current = getResponses();
+      current.push(payload);
+      saveResponses(current);
+      renderPreview();
+      generateExcel();
       form.reset();
-      statusMessage.textContent = "Survey submitted. Local Excel file has been updated.";
+      statusMessage.textContent = "Survey submitted. Local Excel has been updated.";
     });
 
     downloadBtn.addEventListener("click", () => {
       generateExcel();
-      statusMessage.textContent = "Latest local Excel file downloaded.";
+      statusMessage.textContent = "Latest local Excel downloaded.";
     });
 
-    buildDepartmentCheckboxes();
-    renderPreviewTable();
+    buildDepartmentList();
+    renderPreview();
   </script>
 </body>
 </html>
