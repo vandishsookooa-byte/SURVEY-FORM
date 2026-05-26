@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RT Knits - Transport Department Service Survey</title>
+  <style>
+    :root {
+      --primary: #154360;
+      --primary-soft: #eaf3fa;
+      --accent: #1f7a8c;
+      --text: #1f2933;
+      --muted: #52606d;
+      --border: #d9e2ec;
+      --success: #1b8a5a;
+      --bg: #f7f9fc;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 30px auto;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .header {
+      padding: 24px;
+      background: linear-gradient(135deg, var(--primary), #1d5f87);
+      color: var(--white);
+    }
+
+    .header h1 {
+      margin: 0 0 6px;
+      font-size: 1.5rem;
+    }
+
+    .header p {
+      margin: 0;
+      opacity: 0.95;
+    }
+
+    form {
+      padding: 24px;
+    }
+
+    .section {
+      margin-bottom: 22px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: 1.05rem;
+      color: var(--primary);
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 9px 10px;
+      border: 1px solid #bcccdc;
+      border-radius: 8px;
+      font: inherit;
+      color: var(--text);
+      background: #fff;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 96px;
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 8px 12px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-weight: 500;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+
+    .rating-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .rating-row {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 1.6fr 1fr;
+      align-items: end;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font: inherit;
+      font-weight: 700;
+      color: #fff;
+      background: var(--accent);
+      cursor: pointer;
+    }
+
+    button:hover { background: #1d6a79; }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .status {
+      margin-top: 12px;
+      color: var(--success);
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 900px;
+      font-size: 0.86rem;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      padding: 8px;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 700;
+      position: sticky;
+      top: 0;
+    }
+
+    @media (max-width: 700px) {
+      .container { margin: 10px; }
+      form { padding: 16px; }
+      .rating-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>RT Knits - Transport Department Service Survey</h1>
+      <p>Measure service quality and satisfaction across all departments.</p>
+    </header>
+
+    <form id="surveyForm">
+      <section class="section">
+        <h2>1) Respondent Information</h2>
+        <div class="grid two">
+          <div>
+            <label for="respondentName">Employee Name</label>
+            <input type="text" id="respondentName" name="respondentName" required placeholder="Enter your name">
+          </div>
+          <div>
+            <label for="employeeId">Employee ID (optional)</label>
+            <input type="text" id="employeeId" name="employeeId" placeholder="e.g. RTK-1029">
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>2) Department</h2>
+        <p class="hint">Select one or more departments you represent.</p>
+        <div class="checkbox-grid" id="departmentList"></div>
+      </section>
+
+      <section class="section">
+        <h2>3) Service Ratings (1 = Poor, 5 = Excellent)</h2>
+        <div class="rating-grid">
+          <div class="rating-row">
+            <div>
+              <label for="pickupDropRating">Conveyance (Pickup & Drop-off of Employees)</label>
+            </div>
+            <div>
+              <select id="pickupDropRating" name="pickupDropRating" required>
+                <option value="">Select rating</option>
+                <option value="1">1 - Poor</option>
+                <option value="2">2 - Fair</option>
+                <option value="3">3 - Good</option>
+                <option value="4">4 - Very Good</option>
+                <option value="5">5 - Excellent</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="rating-row">
+            <div>
+              <label for="overtimeTransportRating">Overtime Transport Arrangement</label>
+            </div>
+            <div>
+              <select id="overtimeTransportRating" name="overtimeTransportRating" required>
+                <option value="">Select rating</option>
+                <option value="1">1 - Poor</option>
+                <option value="2">2 - Fair</option>
+                <option value="3">3 - Good</option>
+                <option value="4">4 - Very Good</option>
+                <option value="5">5 - Excellent</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="rating-row">
+            <div>
+              <label for="transferPlanningRating">Production Planning: Outgoing/Incoming Transfer Requests</label>
+            </div>
+            <div>
+              <select id="transferPlanningRating" name="transferPlanningRating" required>
+                <option value="">Select rating</option>
+                <option value="1">1 - Poor</option>
+                <option value="2">2 - Fair</option>
+                <option value="3">3 - Good</option>
+                <option value="4">4 - Very Good</option>
+                <option value="5">5 - Excellent</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="rating-row">
+            <div>
+              <label for="logisticsRating">Import and Export Logistics Service</label>
+            </div>
+            <div>
+              <select id="logisticsRating" name="logisticsRating" required>
+                <option value="">Select rating</option>
+                <option value="1">1 - Poor</option>
+                <option value="2">2 - Fair</option>
+                <option value="3">3 - Good</option>
+                <option value="4">4 - Very Good</option>
+                <option value="5">5 - Excellent</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="rating-row">
+            <div>
+              <label for="overallSatisfaction">Overall Satisfaction with Transport Department</label>
+            </div>
+            <div>
+              <select id="overallSatisfaction" name="overallSatisfaction" required>
+                <option value="">Select rating</option>
+                <option value="1">1 - Poor</option>
+                <option value="2">2 - Fair</option>
+                <option value="3">3 - Good</option>
+                <option value="4">4 - Very Good</option>
+                <option value="5">5 - Excellent</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>4) Feedback</h2>
+        <label for="comments">Comments / Suggestions</label>
+        <textarea id="comments" name="comments" placeholder="Please share issues, suggestions, or improvement ideas..."></textarea>
+      </section>
+
+      <div class="btn-row">
+        <button type="submit">Submit Survey</button>
+        <button type="button" id="downloadBtn">Download Latest Excel</button>
+        <span class="hint">Excel updates automatically on every submit.</span>
+      </div>
+      <p class="status" id="statusMessage" aria-live="polite"></p>
+
+      <section class="section">
+        <h2>5) Local Submission Summary</h2>
+        <p class="hint">Saved in this browser only. Current responses: <strong id="entryCount">0</strong></p>
+        <div class="table-wrap">
+          <table id="previewTable">
+            <thead>
+              <tr>
+                <th>Submitted At</th>
+                <th>Employee Name</th>
+                <th>Employee ID</th>
+                <th>Departments</th>
+                <th>Pickup & Drop</th>
+                <th>Overtime Transport</th>
+                <th>Transfer Planning</th>
+                <th>Import/Export Logistics</th>
+                <th>Overall</th>
+                <th>Comments</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </form>
+  </div>
+
+  <script>
+    const departments = [
+      "Make Up",
+      "Cutting",
+      "Embroidery",
+      "Dyehouse",
+      "Printing",
+      "Maintenance",
+      "Shipping",
+      "Purchasing",
+      "Knitting",
+      "Marketing",
+      "Yarn Store",
+      "Fabric Store",
+      "Central Store",
+      "Admin"
+    ];
+
+    const storageKey = "rtKnitsTransportSurveyResponses";
+    const form = document.getElementById("surveyForm");
+    const departmentList = document.getElementById("departmentList");
+    const statusMessage = document.getElementById("statusMessage");
+    const entryCount = document.getElementById("entryCount");
+    const previewBody = document.querySelector("#previewTable tbody");
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    function buildDepartmentCheckboxes() {
+      departmentList.innerHTML = "";
+      departments.forEach((department, index) => {
+        const wrapper = document.createElement("label");
+        wrapper.className = "checkbox-item";
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.name = "departments";
+        checkbox.value = department;
+        checkbox.id = `department-${index}`;
+        wrapper.appendChild(checkbox);
+        wrapper.appendChild(document.createTextNode(department));
+        departmentList.appendChild(wrapper);
+      });
+    }
+
+    function getSavedResponses() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveResponses(data) {
+      localStorage.setItem(storageKey, JSON.stringify(data));
+    }
+
+    function renderPreviewTable() {
+      const responses = getSavedResponses();
+      entryCount.textContent = String(responses.length);
+      previewBody.innerHTML = "";
+
+      responses.slice().reverse().forEach((response) => {
+        const row = document.createElement("tr");
+        [
+          response.submittedAt,
+          response.respondentName,
+          response.employeeId,
+          response.departments,
+          response.pickupDropRating,
+          response.overtimeTransportRating,
+          response.transferPlanningRating,
+          response.logisticsRating,
+          response.overallSatisfaction,
+          response.comments
+        ].forEach((value) => {
+          const cell = document.createElement("td");
+          cell.textContent = value || "-";
+          row.appendChild(cell);
+        });
+        previewBody.appendChild(row);
+      });
+    }
+
+    function escapeXml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&apos;");
+    }
+
+    function generateExcel() {
+      const responses = getSavedResponses();
+      const headers = [
+        "submittedAt",
+        "respondentName",
+        "employeeId",
+        "departments",
+        "pickupDropRating",
+        "overtimeTransportRating",
+        "transferPlanningRating",
+        "logisticsRating",
+        "overallSatisfaction",
+        "comments"
+      ];
+
+      const rows = responses.map((row) =>
+        headers.map((header) => escapeXml(row[header] || ""))
+      );
+
+      const headerRow = headers
+        .map((header) => `<Cell><Data ss:Type="String">${escapeXml(header)}</Data></Cell>`)
+        .join("");
+
+      const bodyRows = rows
+        .map((cells) => `<Row>${cells.map((value) => `<Cell><Data ss:Type="String">${value}</Data></Cell>`).join("")}</Row>`)
+        .join("");
+
+      const workbookXml = `<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+ <Worksheet ss:Name="Transport Survey">
+  <Table>
+   <Row>${headerRow}</Row>
+   ${bodyRows}
+  </Table>
+ </Worksheet>
+</Workbook>`;
+
+      const blob = new Blob([workbookXml], { type: "application/vnd.ms-excel" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "RT_Knits_Transport_Survey_Responses.xls";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(link.href);
+    }
+
+    function getSelectedDepartments() {
+      return Array.from(document.querySelectorAll('input[name="departments"]:checked'))
+        .map((input) => input.value);
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      statusMessage.textContent = "";
+
+      const selectedDepartments = getSelectedDepartments();
+      if (selectedDepartments.length === 0) {
+        statusMessage.textContent = "Please select at least one department.";
+        return;
+      }
+
+      const payload = {
+        submittedAt: new Date().toLocaleString(),
+        respondentName: document.getElementById("respondentName").value.trim(),
+        employeeId: document.getElementById("employeeId").value.trim(),
+        departments: selectedDepartments.join(", "),
+        pickupDropRating: document.getElementById("pickupDropRating").value,
+        overtimeTransportRating: document.getElementById("overtimeTransportRating").value,
+        transferPlanningRating: document.getElementById("transferPlanningRating").value,
+        logisticsRating: document.getElementById("logisticsRating").value,
+        overallSatisfaction: document.getElementById("overallSatisfaction").value,
+        comments: document.getElementById("comments").value.trim()
+      };
+
+      const existing = getSavedResponses();
+      existing.push(payload);
+      saveResponses(existing);
+      renderPreviewTable();
+      generateExcel();
+
+      form.reset();
+      statusMessage.textContent = "Survey submitted. Local Excel file has been updated.";
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      generateExcel();
+      statusMessage.textContent = "Latest local Excel file downloaded.";
+    });
+
+    buildDepartmentCheckboxes();
+    renderPreviewTable();
+  </script>
+</body>
+</html>
