@@ -132,18 +132,12 @@
         <h2>1) Optional Information</h2>
         <div class="grid two">
           <div>
-            <label for="employeeId">Employee ID (optional)</label>
-            <input type="text" id="employeeId" name="employeeId">
+            <label for="employeeName">Employee Name (optional)</label>
+            <input type="text" id="employeeName" name="employeeName">
           </div>
           <div>
-            <label for="shiftTiming">Shift Timing</label>
-            <select id="shiftTiming" name="shiftTiming" required>
-              <option value="">Select shift</option>
-              <option>Morning Shift</option>
-              <option>General Shift</option>
-              <option>Evening Shift</option>
-              <option>Night Shift</option>
-            </select>
+            <label for="employeeId">Employee ID (optional)</label>
+            <input type="text" id="employeeId" name="employeeId">
           </div>
         </div>
       </section>
@@ -156,10 +150,11 @@
 
       <section class="section">
         <h2>3) Conveyance Section</h2>
+        <p class="hint">Employee Transportation &amp; Conveyance Services</p>
         <div class="question-row">
-          <div><label for="pickupDropRating">Conveyance (Pickup & Drop-off of Employees)</label></div>
+          <div><label for="conveyanceAllocationRating">Conveyance Allocation &amp; Employee Transportation Services (Pick-up, Drop-off, Staff Mobility &amp; Transport Coordination)</label></div>
           <div>
-            <select id="pickupDropRating" name="pickupDropRating" required>
+            <select id="conveyanceAllocationRating" name="conveyanceAllocationRating">
               <option value="">Select rating</option>
               <option value="1">1 - Poor</option>
               <option value="2">2 - Fair</option>
@@ -170,9 +165,9 @@
           </div>
         </div>
         <div class="question-row">
-          <div><label for="overtimeTransportRating">Overtime Transport Arrangement</label></div>
+          <div><label for="specialTransportRating">Overtime &amp; Special Transport Arrangement Services (Company Vehicles &amp; Contractor Transport Support)</label></div>
           <div>
-            <select id="overtimeTransportRating" name="overtimeTransportRating" required>
+            <select id="specialTransportRating" name="specialTransportRating">
               <option value="">Select rating</option>
               <option value="1">1 - Poor</option>
               <option value="2">2 - Fair</option>
@@ -183,9 +178,22 @@
           </div>
         </div>
         <div class="question-row">
-          <div><label for="overallConveyanceSatisfaction">Overall Satisfaction with Conveyance</label></div>
+          <div><label for="conveyanceResponsivenessRating">Responsiveness &amp; Efficiency of Conveyance Support Services</label></div>
           <div>
-            <select id="overallConveyanceSatisfaction" name="overallConveyanceSatisfaction" required>
+            <select id="conveyanceResponsivenessRating" name="conveyanceResponsivenessRating">
+              <option value="">Select rating</option>
+              <option value="1">1 - Poor</option>
+              <option value="2">2 - Fair</option>
+              <option value="3">3 - Good</option>
+              <option value="4">4 - Very Good</option>
+              <option value="5">5 - Excellent</option>
+            </select>
+          </div>
+        </div>
+        <div class="question-row">
+          <div><label for="overallConveyanceSatisfaction">Overall Satisfaction with Conveyance Services</label></div>
+          <div>
+            <select id="overallConveyanceSatisfaction" name="overallConveyanceSatisfaction">
               <option value="">Select rating</option>
               <option value="1">1 - Poor</option>
               <option value="2">2 - Fair</option>
@@ -199,10 +207,11 @@
 
       <section class="section">
         <h2>4) Production Section</h2>
+        <p class="hint">Production &amp; Operational Transport Support Services</p>
         <div class="question-row">
-          <div><label for="transferPlanningRating">Production Planning: Outgoing/Incoming Transfer Requests</label></div>
+          <div><label for="productionPlanningRating">Daily Transport Planning &amp; Operational Coordination (Production Support, Internal Movements &amp; Transport Scheduling)</label></div>
           <div>
-            <select id="transferPlanningRating" name="transferPlanningRating" required>
+            <select id="productionPlanningRating" name="productionPlanningRating" required>
               <option value="">Select rating</option>
               <option value="1">1 - Poor</option>
               <option value="2">2 - Fair</option>
@@ -213,9 +222,9 @@
           </div>
         </div>
         <div class="question-row">
-          <div><label for="logisticsRating">Import and Export Logistics Service</label></div>
+          <div><label for="logisticsRequestRating">Logistics &amp; Transport Request Management (Import/Export, Delivery Coordination, Document Dispatch &amp; Operational Requests)</label></div>
           <div>
-            <select id="logisticsRating" name="logisticsRating" required>
+            <select id="logisticsRequestRating" name="logisticsRequestRating" required>
               <option value="">Select rating</option>
               <option value="1">1 - Poor</option>
               <option value="2">2 - Fair</option>
@@ -226,7 +235,20 @@
           </div>
         </div>
         <div class="question-row">
-          <div><label for="overallProductionSatisfaction">Overall Satisfaction with Production Support</label></div>
+          <div><label for="productionResponsivenessRating">Responsiveness &amp; Efficiency of Production Transport Support Services</label></div>
+          <div>
+            <select id="productionResponsivenessRating" name="productionResponsivenessRating" required>
+              <option value="">Select rating</option>
+              <option value="1">1 - Poor</option>
+              <option value="2">2 - Fair</option>
+              <option value="3">3 - Good</option>
+              <option value="4">4 - Very Good</option>
+              <option value="5">5 - Excellent</option>
+            </select>
+          </div>
+        </div>
+        <div class="question-row">
+          <div><label for="overallProductionSatisfaction">Overall Satisfaction with Production Support Services</label></div>
           <div>
             <select id="overallProductionSatisfaction" name="overallProductionSatisfaction" required>
               <option value="">Select rating</option>
@@ -311,14 +333,16 @@
       }
 
       const payload = {
+        employeeName: document.getElementById("employeeName").value.trim(),
         employeeId: document.getElementById("employeeId").value.trim(),
-        shiftTiming: document.getElementById("shiftTiming").value,
         departments: selectedDepartments.join(", "),
-        pickupDropRating: document.getElementById("pickupDropRating").value,
-        overtimeTransportRating: document.getElementById("overtimeTransportRating").value,
+        conveyanceAllocationRating: document.getElementById("conveyanceAllocationRating").value,
+        specialTransportRating: document.getElementById("specialTransportRating").value,
+        conveyanceResponsivenessRating: document.getElementById("conveyanceResponsivenessRating").value,
         overallConveyanceSatisfaction: document.getElementById("overallConveyanceSatisfaction").value,
-        transferPlanningRating: document.getElementById("transferPlanningRating").value,
-        logisticsRating: document.getElementById("logisticsRating").value,
+        productionPlanningRating: document.getElementById("productionPlanningRating").value,
+        logisticsRequestRating: document.getElementById("logisticsRequestRating").value,
+        productionResponsivenessRating: document.getElementById("productionResponsivenessRating").value,
         overallProductionSatisfaction: document.getElementById("overallProductionSatisfaction").value,
         comments: document.getElementById("comments").value.trim()
       };

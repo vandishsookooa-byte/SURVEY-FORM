@@ -11,14 +11,16 @@ EXCEL_FILE = BASE_DIR / "RT_Knits_Transport_Survey_Responses.xlsx"
 
 HEADERS = [
     "submittedAt",
+    "employeeName",
     "employeeId",
-    "shiftTiming",
     "departments",
-    "pickupDropRating",
-    "overtimeTransportRating",
+    "conveyanceAllocationRating",
+    "specialTransportRating",
+    "conveyanceResponsivenessRating",
     "overallConveyanceSatisfaction",
-    "transferPlanningRating",
-    "logisticsRating",
+    "productionPlanningRating",
+    "logisticsRequestRating",
+    "productionResponsivenessRating",
     "overallProductionSatisfaction",
     "comments",
 ]
@@ -43,24 +45,32 @@ def index():
 def submit():
     data = request.get_json(silent=True) or {}
 
-    if not data.get("shiftTiming"):
-        return jsonify({"message": "Shift timing is required."}), 400
     if not data.get("departments"):
         return jsonify({"message": "At least one department is required."}), 400
+    if not data.get("productionPlanningRating"):
+        return jsonify({"message": "Production planning rating is required."}), 400
+    if not data.get("logisticsRequestRating"):
+        return jsonify({"message": "Logistics request management rating is required."}), 400
+    if not data.get("productionResponsivenessRating"):
+        return jsonify({"message": "Production responsiveness rating is required."}), 400
+    if not data.get("overallProductionSatisfaction"):
+        return jsonify({"message": "Overall production satisfaction is required."}), 400
 
     ensure_excel_file()
     workbook = load_workbook(EXCEL_FILE)
     sheet = workbook.active
     row = [
         datetime.now().isoformat(timespec="seconds"),
+        str(data.get("employeeName", "")).strip(),
         str(data.get("employeeId", "")).strip(),
-        str(data.get("shiftTiming", "")).strip(),
         str(data.get("departments", "")).strip(),
-        str(data.get("pickupDropRating", "")).strip(),
-        str(data.get("overtimeTransportRating", "")).strip(),
+        str(data.get("conveyanceAllocationRating", "")).strip(),
+        str(data.get("specialTransportRating", "")).strip(),
+        str(data.get("conveyanceResponsivenessRating", "")).strip(),
         str(data.get("overallConveyanceSatisfaction", "")).strip(),
-        str(data.get("transferPlanningRating", "")).strip(),
-        str(data.get("logisticsRating", "")).strip(),
+        str(data.get("productionPlanningRating", "")).strip(),
+        str(data.get("logisticsRequestRating", "")).strip(),
+        str(data.get("productionResponsivenessRating", "")).strip(),
         str(data.get("overallProductionSatisfaction", "")).strip(),
         str(data.get("comments", "")).strip(),
     ]
