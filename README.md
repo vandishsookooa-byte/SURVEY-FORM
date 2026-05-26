@@ -13,8 +13,10 @@ Transport Department survey form for **RT Knits LTD** with:
    - `pip install -r requirements.txt`
 3. Start the app:
    - `python app.py`
+   - If port 5000 is already in use, run `PORT=5001 python app.py`
 4. Open:
    - `http://127.0.0.1:5000`
+   - Or the alternate port you set, for example `http://127.0.0.1:5001`
 5. Submit the form.
 
 ## Excel output

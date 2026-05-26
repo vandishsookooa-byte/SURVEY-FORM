@@ -1,13 +1,13 @@
+import os
 from datetime import datetime
 from pathlib import Path
 
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, request
 from openpyxl import Workbook, load_workbook
-
-app = Flask(__name__)
 
 BASE_DIR = Path(__file__).resolve().parent
 EXCEL_FILE = BASE_DIR / "RT_Knits_Transport_Survey_Responses.xlsx"
+app = Flask(__name__, static_folder=str(BASE_DIR), static_url_path="")
 
 HEADERS = [
     "submittedAt",
@@ -38,7 +38,12 @@ def ensure_excel_file() -> None:
 
 @app.get("/")
 def index():
-    return send_from_directory(BASE_DIR, "index.html")
+    return app.send_static_file("index.html")
+
+
+@app.get("/favicon.ico")
+def favicon():
+    return ("", 204)
 
 
 @app.post("/submit")
@@ -86,4 +91,5 @@ def submit():
 
 if __name__ == "__main__":
     ensure_excel_file()
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    port = int(os.environ.get("PORT", "5000"))
+    app.run(host="0.0.0.0", port=port, debug=False)
