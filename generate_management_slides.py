@@ -41,6 +41,9 @@ CORE_COLUMNS = [
     "comments",
 ]
 
+POSITIVE_KEYWORDS = ["reliable", "support", "quick", "efficient", "appreciate", "good", "great", "available"]
+PAIN_POINT_KEYWORDS = ["late", "delay", "slow", "issue", "problem", "difficult", "pickup", "bid"]
+
 
 @dataclass
 class Theme:
@@ -257,12 +260,18 @@ def add_heat_table(slide, title: str, scores: pd.Series, x: float, y: float, w: 
 
 
 def theme_counts(comments: pd.Series) -> tuple[list[str], list[str]]:
-    positives = ["reliable", "support", "quick", "efficient", "appreciate", "good", "great", "available"]
-    pain = ["late", "delay", "slow", "issue", "problem", "difficult", "pickup", "bid"]
-
     text = " ".join(comments.dropna().astype(str).str.lower())
-    pos_hits = Counter({k: text.count(k) for k in positives if text.count(k) > 0})
-    pain_hits = Counter({k: text.count(k) for k in pain if text.count(k) > 0})
+    pos_hits = Counter()
+    for keyword in POSITIVE_KEYWORDS:
+        count = text.count(keyword)
+        if count > 0:
+            pos_hits[keyword] = count
+
+    pain_hits = Counter()
+    for keyword in PAIN_POINT_KEYWORDS:
+        count = text.count(keyword)
+        if count > 0:
+            pain_hits[keyword] = count
 
     top_pos = [f"{k} ({v})" for k, v in pos_hits.most_common(5)] or ["Strong transport support recognition"]
     top_pain = [f"{k} ({v})" for k, v in pain_hits.most_common(5)] or ["No recurring negative theme detected"]
@@ -270,9 +279,8 @@ def theme_counts(comments: pd.Series) -> tuple[list[str], list[str]]:
 
 
 def anonymized_quotes(df: pd.DataFrame) -> list[str]:
-    comments = (
-        df["comments"].dropna().astype(str).str.strip().replace({"": pd.NA}).dropna().drop_duplicates().head(5).tolist()
-    )
+    cleaned_comments = df["comments"].dropna().astype(str).str.strip().replace({"": pd.NA}).dropna()
+    comments = cleaned_comments.drop_duplicates().head(5).tolist()
     return [f"Employee #{idx + 1}: {comment}" for idx, comment in enumerate(comments)]
 
 
@@ -297,9 +305,9 @@ def add_bullets(slide, heading: str, bullets: list[str], x: float, y: float, w: 
 def detect_headcount(df: pd.DataFrame) -> float | None:
     candidates = [c for c in df.columns if "headcount" in normalize_column_name(c) or "employees" in normalize_column_name(c)]
     for col in candidates:
-        vals = pd.to_numeric(df[col], errors="coerce").dropna()
-        if not vals.empty:
-            return float(vals.max())
+        headcount_values = pd.to_numeric(df[col], errors="coerce").dropna()
+        if not headcount_values.empty:
+            return float(headcount_values.max())
     return None
 
 
@@ -320,7 +328,7 @@ def build_presentation(df: pd.DataFrame, output: Path, company_name: str) -> Non
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     make_title(slide, "Executive Summary", f"{company_name} | Conveyance & Production Survey", theme)
 
-    response_rate = f"{(total_responses / headcount * 100):.1f}%" if headcount and headcount > 0 else "N/A"
+    response_rate = f"{(total_responses / headcount * 100):.1f}%" if headcount else "N/A"
     add_kpi_card(slide, 0.6, 1.5, "Total Responses", str(total_responses), theme.blue, theme)
     add_kpi_card(slide, 3.75, 1.5, "Response Rate", response_rate, theme.cyan, theme)
     add_kpi_card(slide, 6.9, 1.5, "Conveyance Avg", f"{conveyance_avg:.2f}" if not math.isnan(conveyance_avg) else "N/A", signal_color(conveyance_avg, theme), theme)

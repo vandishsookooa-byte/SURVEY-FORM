@@ -26,7 +26,7 @@ The script builds a 6-slide presentation:
 5. Voice of Employee
    - Top positive themes
    - Top pain points
-   - 3-5 anonymized comment quotes
+   - Up to 5 anonymized comment quotes
 6. Actions & Ownership
    - Top 5 improvement actions
    - Owner, priority, target, and KPI
